@@ -3,7 +3,7 @@ import TaskForm from "./TaskForm";
 import useHttp from "../../hooks/use-http";
 const NewTask = (props) => {
   const { isLoading, error, sendRequest: sendTaskReaquest } = useHttp();
-  const createTask = (taskData) => {
+  const createTask = (taskText, taskData) => {
     const generatedId = taskData.name; // firebase-specific => "name" contains generated id
     const createdTask = { id: generatedId, text: taskText };
 
@@ -19,7 +19,7 @@ const NewTask = (props) => {
         },
         body: { text: taskText },
       },
-      createTask
+      createTask.bind(null, taskText)
     );
   };
 
